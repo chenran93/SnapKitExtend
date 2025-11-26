@@ -101,7 +101,7 @@ public struct ConstraintArrayDSL {
                         return
                     }
                     make.width.equalTo(prev)
-                    make.leading.equalTo(prev.snp.right).offset(fixedSpacing)
+                    make.leading.equalTo(prev.snp.trailing).offset(fixedSpacing)
                     if (i == self.array.count - 1) {//last one
                         make.trailing.equalTo(tempSuperView).offset(-tailSpacing)
                     }
@@ -287,13 +287,13 @@ public struct ConstraintArrayDSL {
                 }
                 if currentColumn == warpCount - 1 {//last col
                     if currentColumn != 0 {//just one line
-                        make.leading.equalTo(prev.snp.right).offset(fixedInteritemSpacing)
+                        make.leading.equalTo(prev.snp.trailing).offset(fixedInteritemSpacing)
                     }
                     make.trailing.equalTo(tempSuperView).offset(-edgeInset.right)
                 }
                 
                 if currentColumn != 0 && currentColumn != warpCount - 1 {//other col
-                    make.leading.equalTo(prev.snp.right).offset(fixedInteritemSpacing);
+                    make.leading.equalTo(prev.snp.trailing).offset(fixedInteritemSpacing);
                 }
             })
             prev = v
