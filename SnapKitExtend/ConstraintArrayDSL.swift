@@ -97,13 +97,13 @@ public struct ConstraintArrayDSL {
             for (i, v) in self.array.enumerated() {
                 v.snp.makeConstraints({ (make) in
                     guard let prev = prev else {//first one
-                        make.left.equalTo(tempSuperView).offset(leadSpacing)
+                        make.leading.equalTo(tempSuperView).offset(leadSpacing)
                         return
                     }
                     make.width.equalTo(prev)
-                    make.left.equalTo(prev.snp.right).offset(fixedSpacing)
+                    make.leading.equalTo(prev.snp.right).offset(fixedSpacing)
                     if (i == self.array.count - 1) {//last one
-                        make.right.equalTo(tempSuperView).offset(-tailSpacing)
+                        make.trailing.equalTo(tempSuperView).offset(-tailSpacing)
                     }
                 })
                 prev = v;
@@ -147,15 +147,15 @@ public struct ConstraintArrayDSL {
                     make.width.equalTo(fixedItemLength)
                     if prev != nil {
                         if (i == self.array.count - 1) {//last one
-                            make.right.equalTo(tempSuperView).offset(-tailSpacing);
+                            make.trailing.equalTo(tempSuperView).offset(-tailSpacing);
                         } else {
                             let offset = (CGFloat(1) - (CGFloat(i) / CGFloat(self.array.count - 1))) *
                                 (fixedItemLength + leadSpacing) -
                                 CGFloat(i) * tailSpacing / CGFloat(self.array.count - 1)
-                            make.right.equalTo(tempSuperView).multipliedBy(CGFloat(i) / CGFloat(self.array.count - 1)).offset(offset)
+                            make.trailing.equalTo(tempSuperView).multipliedBy(CGFloat(i) / CGFloat(self.array.count - 1)).offset(offset)
                         }
                     }else {//first one
-                        make.left.equalTo(tempSuperView).offset(leadSpacing);
+                        make.leading.equalTo(tempSuperView).offset(leadSpacing);
                     }
                 })
                 prev = v;
@@ -225,17 +225,17 @@ public struct ConstraintArrayDSL {
                 }
                 
                 if currentColumn == 0 {//first col
-                    make.left.equalTo(tempSuperView).offset(edgeInset.left)
+                    make.leading.equalTo(tempSuperView).offset(edgeInset.left)
                 }
                 if currentColumn == columnCount - 1 {//last col
-                    make.right.equalTo(tempSuperView).offset(-edgeInset.right)
+                    make.trailing.equalTo(tempSuperView).offset(-edgeInset.right)
                 }
                 
                 if currentColumn != 0 && currentColumn != columnCount - 1 {//other col
                     let offset = (CGFloat(1) - CGFloat(currentColumn) / CGFloat(columnCount - 1)) *
                         (fixedItemWidth + edgeInset.left) -
                         CGFloat(currentColumn) * edgeInset.right / CGFloat(columnCount - 1)
-                    make.right.equalTo(tempSuperView).multipliedBy(CGFloat(currentColumn) / CGFloat(columnCount - 1)).offset(offset);
+                    make.trailing.equalTo(tempSuperView).multipliedBy(CGFloat(currentColumn) / CGFloat(columnCount - 1)).offset(offset);
                 }
             })
         }
@@ -271,7 +271,7 @@ public struct ConstraintArrayDSL {
             v.snp.makeConstraints({ (make) in
                 guard let prev = prev else {//first row & first col
                     make.top.equalTo(tempSuperView).offset(edgeInset.top)
-                    make.left.equalTo(tempSuperView).offset(edgeInset.left)
+                    make.leading.equalTo(tempSuperView).offset(edgeInset.left)
                     return
                 }
                 make.width.height.equalTo(prev)
@@ -287,13 +287,13 @@ public struct ConstraintArrayDSL {
                 }
                 if currentColumn == warpCount - 1 {//last col
                     if currentColumn != 0 {//just one line
-                        make.left.equalTo(prev.snp.right).offset(fixedInteritemSpacing)
+                        make.leading.equalTo(prev.snp.right).offset(fixedInteritemSpacing)
                     }
-                    make.right.equalTo(tempSuperView).offset(-edgeInset.right)
+                    make.trailing.equalTo(tempSuperView).offset(-edgeInset.right)
                 }
                 
                 if currentColumn != 0 && currentColumn != warpCount - 1 {//other col
-                    make.left.equalTo(prev.snp.right).offset(fixedInteritemSpacing);
+                    make.leading.equalTo(prev.snp.right).offset(fixedInteritemSpacing);
                 }
             })
             prev = v
